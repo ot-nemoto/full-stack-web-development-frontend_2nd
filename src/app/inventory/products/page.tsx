@@ -1,7 +1,32 @@
 export default function Page() {
+  const products = [
+    {
+      id: 1,
+      name: "コットン100%バックリボンティアードワンピース（黒）",
+      price: 6900,
+      description:
+        "大人の愛らしさを引き立てる、ナチュラルな風合い。リラックスxトレンドを楽しめる、上品なティアードワンピース。",
+    },
+    {
+      id: 2,
+      name: "ライトストレッチカットソー（ネイビー）",
+      price: 2980,
+      description:
+        "しなやかな肌触りが心地よい、程よいフィット感のカットソー。ビジネスカジュアルにも普段使いにも使える、ベーシックなデザイン。",
+    },
+    {
+      id: 3,
+      name: "ベルト付きデニムパンツ（ブルー）",
+      price: 5980,
+      description:
+        "定番のデニムパンツに、フェミニンなベルトをプラスしたスタイリッシュなアイテム。カジュアルにもきれいめにも合わせやすい。",
+    },
+  ];
+
   return (
     <>
       <h2>商品一覧</h2>
+      <button type="button">商品を追加する</button>
       <table>
         <thead>
           <tr>
@@ -12,30 +37,14 @@ export default function Page() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>コットン100%バックリボンティアードワンピース（黒）</td>
-            <td>6900</td>
-            <td>
-              大人の愛らしさを引き立てる、ナチュラルな風合い。リラックスxトレンドを楽しめる、上品なティアードワンピース。
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>ライトストレッチカットソー（ネイビー）</td>
-            <td>2980</td>
-            <td>
-              しなやかな肌触りが心地よい、程よいフィット感のカットソー。ビジネスカジュアルにも普段使いにも使える、ベーシックなデザイン。
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>ベルト付きデニムパンツ（ブルー）</td>
-            <td>5980</td>
-            <td>
-              定番のデニムパンツに、フェミニンなベルトをプラスしたスタイリッシュなアイテム。カジュアルにもきれいめにも合わせやすい。
-            </td>
-          </tr>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.price}</td>
+              <td>{product.description}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
