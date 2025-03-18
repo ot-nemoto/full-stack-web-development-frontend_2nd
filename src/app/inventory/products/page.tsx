@@ -26,7 +26,6 @@ export default function Page() {
   return (
     <>
       <h2>商品一覧</h2>
-      <button type="button">商品を追加する</button>
       <table>
         <thead>
           <tr>
