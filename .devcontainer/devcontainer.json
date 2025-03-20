@@ -3,24 +3,5 @@
   "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
   "features": {
     "ghcr.io/devcontainers/features/git:1": {}
-  },
-
-  "postCreateCommand": "yarn install",
-
-  "customizations": {
-    "vscode": {
-      "extensions": ["biomejs.biome"],
-      "settings": {
-        "editor.defaultFormatter": "biomejs.biome",
-        "editor.formatOnSave": true,
-        "editor.insertSpaces": true,
-        "editor.detectIndentation": false,
-        "editor.tabSize": 2,
-        "files.trimTrailingWhitespace": true,
-        "editor.codeActionsOnSave": {
-          "source.organizeImports": "explicit"
-        }
-      }
-    }
   }
 }
