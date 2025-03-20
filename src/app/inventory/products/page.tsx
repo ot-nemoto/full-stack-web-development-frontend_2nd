@@ -32,23 +32,23 @@ export default function Page() {
 
   return (
     <>
-      <h2>商品一覧</h2>
-      <table>
+      <h2 className="text-2xl font-bold mb-4">商品一覧</h2>
+      <table className="min-w-full bg-white border border-gray-200">
         <thead>
-          <tr>
-            <th>商品ID</th>
-            <th>商品名</th>
-            <th>単価</th>
-            <th>説明</th>
+          <tr className="bg-gray-200 text-black">
+            <th className="py-2 px-4 border-b">商品ID</th>
+            <th className="py-2 px-4 border-b">商品名</th>
+            <th className="py-2 px-4 border-b">単価</th>
+            <th className="py-2 px-4 border-b">説明</th>
           </tr>
         </thead>
         <tbody>
           {products.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.description}</td>
+            <tr key={product.id} className="hover:bg-gray-50">
+              <td className="py-2 px-4 border-b">{product.id}</td>
+              <td className="py-2 px-4 border-b">{product.name}</td>
+              <td className="py-2 px-4 border-b">{product.price}</td>
+              <td className="py-2 px-4 border-b">{product.description}</td>
             </tr>
           ))}
         </tbody>
