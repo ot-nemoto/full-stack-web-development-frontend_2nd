@@ -1,34 +1,17 @@
-export default function ProductMain() {
-  const products = [
-    {
-      id: 1,
-      name: "コットン100%バックリボンティアードワンピース（黒）",
-      price: 6900,
-      description:
-        "大人の愛らしさを引き立てる、ナチュラルな風合い。リラックスxトレンドを楽しめる、上品なティアードワンピース。",
-    },
-    {
-      id: 2,
-      name: "ライトストレッチカットソー（ネイビー）",
-      price: 2980,
-      description:
-        "しなやかな肌触りが心地よい、程よいフィット感のカットソー。ビジネスカジュアルにも普段使いにも使える、ベーシックなデザイン。",
-    },
-    {
-      id: 3,
-      name: "ベルト付きデニムパンツ（ブルー）",
-      price: 5980,
-      description:
-        "定番のデニムパンツに、フェミニンなベルトをプラスしたスタイリッシュなアイテム。カジュアルにもきれいめにも合わせやすい。",
-    },
-    {
-      id: 4,
-      name: "レースフレアスカート（ホワイト）",
-      price: 4980,
-      description:
-        "エレガントな雰囲気を醸し出すレーススカート。裏地付きで透け感も抑えられ、通年使えるおすすめアイテム。",
-    },
-  ];
+import type { Product } from "@/types/Product";
+
+export default async function ProductMain() {
+  let products: Product[] = [];
+
+  try {
+    const response = await fetch("http://localhost:3001/products");
+    if (!response.ok) {
+      throw new Error("商品一覧の取得に失敗しました");
+    }
+    products = await response.json();
+  } catch (error) {
+    console.error(error);
+  }
 
   return (
     <main className="flex-grow p-4">
