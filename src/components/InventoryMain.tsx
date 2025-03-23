@@ -1,6 +1,6 @@
 import type { Inventory } from "@/types/Inventory";
 
-export default async function InventoryHistory() {
+export default async function InventoryMain() {
   let inventories: Inventory[] = [];
 
   try {
