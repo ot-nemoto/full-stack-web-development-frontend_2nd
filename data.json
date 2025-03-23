@@ -24,5 +24,57 @@
       "price": 4980,
       "description": "エレガントな雰囲気を醸し出すレーススカート。裏地付きで透け感も抑えられ、通年使えるおすすめアイテム。"
     }
+  ],
+  "inventories": [
+    {
+      "id": 1,
+      "product_id": 1,
+      "type": "仕入れ",
+      "date": "2023-04-03 18:54:17",
+      "price": 6900,
+      "quantity": 400,
+      "totalPrice": 2760000,
+      "inventory": 400
+    },
+    {
+      "id": 2,
+      "product_id": 1,
+      "type": "卸し",
+      "date": "2023-04-04 17:55:16",
+      "price": 6900,
+      "quantity": 10,
+      "totalPrice": 69000,
+      "inventory": 390
+    },
+    {
+      "id": 3,
+      "product_id": 1,
+      "type": "卸し",
+      "date": "2023-04-05 16:56:15",
+      "price": 6900,
+      "quantity": 1,
+      "totalPrice": 6900,
+      "inventory": 389
+    },
+    {
+      "id": 4,
+      "product_id": 1,
+      "type": "仕入れ",
+      "date": "2023-04-06 15:57:14",
+      "price": 6900,
+      "quantity": 3,
+      "totalPrice": 20700,
+      "inventory": 392
+    },
+    {
+      "id": 5,
+      "product_id": 1,
+      "type": "卸し",
+      "date": "2023-04-07 14:58:13",
+      "price": 6900,
+      "quantity": 2,
+      "totalPrice": 13800,
+      "inventory": 390
+    }
   ]
 }
