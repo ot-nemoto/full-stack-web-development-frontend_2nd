@@ -1,11 +1,11 @@
 import type { Inventory } from "@/types/Inventory";
 
-export default async function InventoryMain() {
+export default async function InventoryMain({ id }: { id: number }) {
   let inventories: Inventory[] = [];
 
   try {
     const response = await fetch(
-      "http://localhost:3001/inventories?product_id=1&_sort=date&_order=desc",
+      `http://localhost:3001/inventories?product_id=${id}&_sort=date&_order=desc`,
     );
     if (!response.ok) {
       throw new Error("在庫履歴一覧の取得に失敗しました");
