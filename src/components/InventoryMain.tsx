@@ -10,7 +10,7 @@ export default function InventoryMain({ productId }: { productId: number }) {
     async function fetchInventories() {
       try {
         const response = await fetch(
-          `http://localhost:3001/inventories?product_id=${productId}&_sort=date&_order=desc`,
+          `http://localhost:3000/api/inventory/inventories?product_id=${productId}`,
         );
         if (!response.ok) {
           throw new Error("在庫履歴一覧の取得に失敗しました");

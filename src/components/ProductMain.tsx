@@ -10,7 +10,9 @@ export default function ProductMain() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const response = await fetch("http://localhost:3001/products");
+        const response = await fetch(
+          "http://localhost:3000/api/inventory/products",
+        );
         if (!response.ok) {
           throw new Error("商品一覧の取得に失敗しました");
         }
