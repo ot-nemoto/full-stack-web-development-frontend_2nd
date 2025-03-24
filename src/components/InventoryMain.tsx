@@ -1,19 +1,29 @@
+"use client";
+
 import type { Inventory } from "@/types/Inventory";
+import { useEffect, useState } from "react";
 
-export default async function InventoryMain() {
-  let inventories: Inventory[] = [];
+export default function InventoryMain() {
+  const [inventories, setInventories] = useState<Inventory[]>([]);
 
-  try {
-    const response = await fetch(
-      "http://localhost:3001/inventories?product_id=1&_sort=date&_order=desc",
-    );
-    if (!response.ok) {
-      throw new Error("在庫履歴一覧の取得に失敗しました");
+  useEffect(() => {
+    async function fetchInventories() {
+      try {
+        const response = await fetch(
+          "http://localhost:3001/inventories?product_id=1&_sort=date&_order=desc",
+        );
+        if (!response.ok) {
+          throw new Error("在庫履歴一覧の取得に失敗しました");
+        }
+        const data = await response.json();
+        setInventories(data);
+      } catch (err) {
+        console.error(err);
+      }
     }
-    inventories = await response.json();
-  } catch (error) {
-    console.error(error);
-  }
+
+    fetchInventories();
+  }, []);
 
   return (
     <main className="flex-grow p-4">
