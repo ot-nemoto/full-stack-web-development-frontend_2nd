@@ -1,18 +1,28 @@
+"use client";
+
 import type { Product } from "@/types/Product";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function ProductMain() {
-  let products: Product[] = [];
+export default function ProductMain() {
+  const [products, setProducts] = useState<Product[]>([]);
 
-  try {
-    const response = await fetch("http://localhost:3001/products");
-    if (!response.ok) {
-      throw new Error("商品一覧の取得に失敗しました");
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch("http://localhost:3001/products");
+        if (!response.ok) {
+          throw new Error("商品一覧の取得に失敗しました");
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (err) {
+        console.error(err);
+      }
     }
-    products = await response.json();
-  } catch (error) {
-    console.error(error);
-  }
+
+    fetchProducts();
+  }, []);
 
   return (
     <main className="flex-grow p-4">
