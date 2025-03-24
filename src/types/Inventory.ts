@@ -5,6 +5,6 @@ export type Inventory = {
   date: string;
   price: number;
   quantity: number;
-  totalPrice: number;
+  total_price: number;
   inventory: number;
 };
