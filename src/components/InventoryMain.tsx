@@ -37,7 +37,7 @@ export default async function InventoryMain() {
               <td className="py-2 px-4 border-b">{inventory.date}</td>
               <td className="py-2 px-4 border-b">{inventory.price}</td>
               <td className="py-2 px-4 border-b">{inventory.quantity}</td>
-              <td className="py-2 px-4 border-b">{inventory.totalPrice}</td>
+              <td className="py-2 px-4 border-b">{inventory.total_price}</td>
               <td className="py-2 px-4 border-b">{inventory.inventory}</td>
             </tr>
           ))}
