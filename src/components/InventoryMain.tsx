@@ -1,29 +1,33 @@
 "use client";
 
 import type { Inventory } from "@/types/Inventory";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function InventoryMain({ productId }: { productId: number }) {
   const [inventories, setInventories] = useState<Inventory[]>([]);
 
-  useEffect(() => {
-    async function fetchInventories() {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/inventory/inventories?product_id=${productId}`,
-        );
-        if (!response.ok) {
-          throw new Error("在庫履歴一覧の取得に失敗しました");
-        }
-        const data = await response.json();
-        setInventories(data);
-      } catch (err) {
-        console.error(err);
+  // 在庫取得処理
+  const fetchInventories = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/inventory/inventories?product_id=${productId}`,
+      );
+      if (!response.ok) {
+        throw new Error("在庫履歴一覧の取得に失敗しました");
       }
+      const data = await response.json();
+      setInventories(data);
+    } catch (err) {
+      console.error(err);
     }
-
-    fetchInventories();
   }, [productId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchInventories();
+    };
+    fetchData();
+  }, [fetchInventories]);
 
   return (
     <main className="flex-grow p-4">
