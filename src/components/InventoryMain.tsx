@@ -115,11 +115,8 @@ export default function InventoryMain({ productId }: { productId: number }) {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchProduct();
-      await fetchInventories();
-    };
-    fetchData();
+    fetchProduct();
+    fetchInventories();
   }, [fetchProduct, fetchInventories]);
 
   return (
