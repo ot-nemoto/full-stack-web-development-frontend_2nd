@@ -10,12 +10,6 @@ export default function InventoryAction({
   const [quantity, setQuantity] = useState(0); // 数量
   const [isProcessing, setIsProcessing] = useState(false); // 処理中状態
 
-  // 正常登録時の処理
-  const handleSuccess = async () => {
-    setQuantity(0);
-    onSuccess();
-  };
-
   // 仕入れ登録処理
   const submitPurchase = async () => {
     if (quantity <= 0) {
@@ -42,7 +36,9 @@ export default function InventoryAction({
         throw new Error("仕入れ登録に失敗しました");
       }
 
-      handleSuccess();
+      // 成功時の処理
+      setQuantity(0);
+      onSuccess();
     } catch (err) {
       console.error(err);
     } finally {
@@ -76,7 +72,9 @@ export default function InventoryAction({
         throw new Error("卸し登録に失敗しました");
       }
 
-      handleSuccess();
+      // 成功時の処理
+      setQuantity(0);
+      onSuccess();
     } catch (err) {
       console.error(err);
     } finally {
