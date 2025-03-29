@@ -23,10 +23,7 @@ export default function InventoryMain() {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchInventories();
-    };
-    fetchData();
+    fetchInventories();
   }, [fetchInventories]);
 
   return (
