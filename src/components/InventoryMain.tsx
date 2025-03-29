@@ -10,12 +10,6 @@ export default function InventoryMain({ productId }: { productId: number }) {
   const [inventories, setInventories] = useState<Inventory[]>([]); // 在庫履歴
   const [isProcessing, setIsProcessing] = useState(false); // 処理中状態
 
-  // 正常登録時の処理
-  const handleSuccess = async () => {
-    setQuantity(0);
-    await fetchInventories();
-  };
-
   // 商品取得処理
   const fetchProduct = useCallback(async () => {
     try {
@@ -74,7 +68,9 @@ export default function InventoryMain({ productId }: { productId: number }) {
         throw new Error("仕入れ登録に失敗しました");
       }
 
-      handleSuccess();
+      // 成功時の処理
+      setQuantity(0);
+      fetchInventories();
     } catch (err) {
       console.error(err);
     } finally {
@@ -108,7 +104,9 @@ export default function InventoryMain({ productId }: { productId: number }) {
         throw new Error("卸し登録に失敗しました");
       }
 
-      handleSuccess();
+      // 成功時の処理
+      setQuantity(0);
+      fetchInventories();
     } catch (err) {
       console.error(err);
     } finally {
