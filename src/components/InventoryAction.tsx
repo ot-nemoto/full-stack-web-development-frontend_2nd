@@ -7,13 +7,11 @@ import { useState } from "react";
 export default function InventoryAction({
   product,
   onSuccess,
-  setSeverity,
-  setMessage,
+  onAlert,
 }: {
   product: Product | null;
   onSuccess: () => void;
-  setSeverity: (severity: Severity) => void;
-  setMessage: (message: string) => void;
+  onAlert: (message: string, severity: Severity) => void;
 }) {
   const [quantity, setQuantity] = useState(0); // 数量
   const [isProcessing, setIsProcessing] = useState(false); // 処理中状態
@@ -21,8 +19,7 @@ export default function InventoryAction({
   // 仕入れ登録処理
   const submitPurchase = async () => {
     if (quantity <= 0) {
-      setSeverity("warning");
-      setMessage("数量は0より大きい整数でなければなりません");
+      onAlert("数量は0より大きい整数でなければなりません", "warning");
       return;
     }
 
@@ -47,13 +44,11 @@ export default function InventoryAction({
       }
 
       // 成功時の処理
-      setSeverity("success");
-      setMessage("在庫処理が完了しました");
+      onAlert("在庫処理が完了しました", "success");
       setQuantity(0);
       onSuccess();
     } catch (err) {
-      setSeverity("error");
-      setMessage("エラーが発生しました");
+      onAlert("エラーが発生しました", "error");
     } finally {
       setIsProcessing(false); // 処理完了
     }
@@ -62,8 +57,7 @@ export default function InventoryAction({
   // 卸し登録処理
   const submitSales = async () => {
     if (quantity <= 0) {
-      setSeverity("warning");
-      setMessage("数量は0より大きい整数でなければなりません");
+      onAlert("数量は0より大きい整数でなければなりません", "warning");
       return;
     }
 
@@ -88,13 +82,11 @@ export default function InventoryAction({
       }
 
       // 成功時の処理
-      setSeverity("success");
-      setMessage("在庫処理が完了しました");
+      onAlert("在庫処理が完了しました", "success");
       setQuantity(0);
       onSuccess();
     } catch (err) {
-      setSeverity("error");
-      setMessage("エラーが発生しました");
+      onAlert("エラーが発生しました", "error");
     } finally {
       setIsProcessing(false); // 処理完了
     }
