@@ -52,3 +52,34 @@ export async function DELETE(
     );
   }
 }
+
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: { id: string } },
+) {
+  const { id } = await params;
+  try {
+    const body = await req.json();
+    const response = await fetch(`http://localhost:3001/products/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update product");
+    }
+
+    const product = await response.json();
+
+    return NextResponse.json(product, { status: 200 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json(
+      { error: "Failed to update product" },
+      { status: 500 },
+    );
+  }
+}
