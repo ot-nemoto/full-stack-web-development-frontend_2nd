@@ -1,6 +1,7 @@
 "use client";
 
 import type { Product } from "@/types/Product";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function ProductMain() {
@@ -33,6 +34,7 @@ export default function ProductMain() {
             <th className="py-2 px-4 border-b">商品名</th>
             <th className="py-2 px-4 border-b">単価</th>
             <th className="py-2 px-4 border-b">説明</th>
+            <th className="py-2 px-4 border-b" />
           </tr>
         </thead>
         <tbody>
@@ -42,6 +44,14 @@ export default function ProductMain() {
               <td className="py-2 px-4 border-b">{product.name}</td>
               <td className="py-2 px-4 border-b">{product.price}</td>
               <td className="py-2 px-4 border-b">{product.description}</td>
+              <td className="py-2 px-4 border-b">
+                <Link
+                  href={`/inventory/products/${product.id}`}
+                  className="text-blue-500 hover:text-blue-700 hover:underline"
+                >
+                  在庫処理
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

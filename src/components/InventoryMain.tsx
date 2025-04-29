@@ -3,14 +3,14 @@
 import type { Inventory } from "@/types/Inventory";
 import { useCallback, useEffect, useState } from "react";
 
-export default function InventoryMain() {
+export default function InventoryMain({ productId }: { productId: number }) {
   const [inventories, setInventories] = useState<Inventory[]>([]);
 
   // 在庫取得処理
   const fetchInventories = useCallback(async () => {
     try {
       const response = await fetch(
-        "http://localhost:3001/inventories?product_id=1&_sort=date&_order=desc",
+        `http://localhost:3001/inventories?product_id=${productId}&_sort=date&_order=desc`,
       );
       if (!response.ok) {
         throw new Error("在庫履歴一覧の取得に失敗しました");
@@ -20,7 +20,7 @@ export default function InventoryMain() {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [productId]);
 
   useEffect(() => {
     fetchInventories();
