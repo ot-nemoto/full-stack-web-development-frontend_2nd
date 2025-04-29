@@ -1,18 +1,28 @@
 "use client";
 
+import type { Severity } from "@/components/Alert";
 import type { Product } from "@/types/Product";
 import { useState } from "react";
 
 export default function InventoryAction({
   product,
   onSuccess,
-}: { product: Product | null; onSuccess: () => void }) {
+  setSeverity,
+  setMessage,
+}: {
+  product: Product | null;
+  onSuccess: () => void;
+  setSeverity: (severity: Severity) => void;
+  setMessage: (message: string) => void;
+}) {
   const [quantity, setQuantity] = useState(0); // 数量
   const [isProcessing, setIsProcessing] = useState(false); // 処理中状態
 
   // 仕入れ登録処理
   const submitPurchase = async () => {
     if (quantity <= 0) {
+      setSeverity("warning");
+      setMessage("数量は0より大きい整数でなければなりません");
       return;
     }
 
@@ -37,10 +47,13 @@ export default function InventoryAction({
       }
 
       // 成功時の処理
+      setSeverity("success");
+      setMessage("在庫処理が完了しました");
       setQuantity(0);
       onSuccess();
     } catch (err) {
-      console.error(err);
+      setSeverity("error");
+      setMessage("エラーが発生しました");
     } finally {
       setIsProcessing(false); // 処理完了
     }
@@ -49,6 +62,8 @@ export default function InventoryAction({
   // 卸し登録処理
   const submitSales = async () => {
     if (quantity <= 0) {
+      setSeverity("warning");
+      setMessage("数量は0より大きい整数でなければなりません");
       return;
     }
 
@@ -73,10 +88,13 @@ export default function InventoryAction({
       }
 
       // 成功時の処理
+      setSeverity("success");
+      setMessage("在庫処理が完了しました");
       setQuantity(0);
       onSuccess();
     } catch (err) {
-      console.error(err);
+      setSeverity("error");
+      setMessage("エラーが発生しました");
     } finally {
       setIsProcessing(false); // 処理完了
     }
