@@ -103,6 +103,32 @@ export default function ProductMain() {
     }
   };
 
+  // 商品削除ボタンクリック時の処理
+  const handleDelete = async (productId: number | null) => {
+    if (productId === null) return;
+
+    const confirmDelete = window.confirm("本当にこの商品を削除しますか？");
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/inventory/products/${productId}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("商品削除に失敗しました");
+      }
+
+      showAlert("商品削除が完了しました", "success");
+      fetchProducts();
+    } catch (error) {
+      showAlert("エラーが発生しました", "error");
+    }
+  };
+
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
@@ -195,6 +221,15 @@ export default function ProductMain() {
                 >
                   在庫処理
                 </Link>
+              </td>
+              <td className="py-2 px-4 border-b">
+                <button
+                  type="button"
+                  className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 cursor-pointer"
+                  onClick={() => handleDelete(product.id)}
+                >
+                  削除
+                </button>
               </td>
             </tr>
           ))}
