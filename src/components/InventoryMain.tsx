@@ -1,9 +1,9 @@
 "use client";
 
-import type { Severity } from "@/components/Alert";
 import Alert from "@/components/Alert";
 import InventoryAction from "@/components/InventoryAction";
 import InventoryHistory from "@/components/InventoryHistory";
+import { useAlert } from "@/hooks/useAlert";
 import type { Inventory } from "@/types/Inventory";
 import type { Product } from "@/types/Product";
 import { useCallback, useEffect, useState } from "react";
@@ -11,9 +11,8 @@ import { useCallback, useEffect, useState } from "react";
 export default function InventoryMain({ productId }: { productId: number }) {
   const [product, setProduct] = useState<Product | null>(null); // 商品情報
   const [inventories, setInventories] = useState<Inventory[]>([]); // 在庫履歴
-  const [severity, setSeverity] = useState<Severity>("info");
-  const [message, setMessage] = useState<string>("");
-  const [visible, setVisible] = useState<boolean>(false);
+
+  const { message, severity, visible, showAlert } = useAlert();
 
   // 商品取得処理
   const fetchProduct = useCallback(async () => {
@@ -52,10 +51,6 @@ export default function InventoryMain({ productId }: { productId: number }) {
     fetchInventories();
   }, [fetchProduct, fetchInventories]);
 
-  useEffect(() => {
-    setVisible(message !== "");
-  }, [message]);
-
   return (
     <main className="flex-grow p-4">
       <Alert severity={severity} visible={visible}>
@@ -65,8 +60,7 @@ export default function InventoryMain({ productId }: { productId: number }) {
       <InventoryAction
         product={product}
         onSuccess={fetchInventories}
-        setSeverity={setSeverity}
-        setMessage={setMessage}
+        onAlert={showAlert}
       />
       <InventoryHistory inventories={inventories} />
     </main>

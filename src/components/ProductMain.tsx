@@ -1,7 +1,7 @@
 "use client";
 
-import type { Severity } from "@/components/Alert";
 import Alert from "@/components/Alert";
+import { useAlert } from "@/hooks/useAlert";
 import type { Product } from "@/types/Product";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -14,9 +14,8 @@ export default function ProductMain() {
     price: 0,
     description: "",
   });
-  const [severity, setSeverity] = useState<Severity>("info");
-  const [message, setMessage] = useState<string>("");
-  const [visible, setVisible] = useState<boolean>(false);
+
+  const { message, severity, visible, showAlert } = useAlert();
 
   const fetchProducts = useCallback(async () => {
     try {
@@ -64,14 +63,12 @@ export default function ProductMain() {
   // 商品追加フォームの登録ボタンクリック時の処理
   const handleRegister = async () => {
     if (newProduct.name === "") {
-      setSeverity("warning");
-      setMessage("商品名は必須です");
+      showAlert("商品名は必須です", "warning");
       return;
     }
 
     if (newProduct.price <= 0) {
-      setSeverity("warning");
-      setMessage("単価は0より大きい整数でなければなりません");
+      showAlert("単価は0より大きい整数でなければなりません", "warning");
       return;
     }
 
@@ -93,8 +90,7 @@ export default function ProductMain() {
       }
 
       // 成功時の処理
-      setSeverity("success");
-      setMessage("商品登録が完了しました");
+      showAlert("商品登録が完了しました", "success");
       setShowForm(false);
       setNewProduct({
         name: "",
@@ -103,18 +99,13 @@ export default function ProductMain() {
       });
       fetchProducts();
     } catch (error) {
-      setSeverity("error");
-      setMessage("エラーが発生しました");
+      showAlert("エラーが発生しました", "error");
     }
   };
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
-
-  useEffect(() => {
-    setVisible(message !== "");
-  }, [message]);
 
   return (
     <main className="flex-grow p-4">
